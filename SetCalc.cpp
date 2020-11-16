@@ -172,42 +172,43 @@ int SetCalc::powerSet(){
     LLNode* tmp = SetLINKED.find(nom);
     if ((!tmp) || (tmp->getData()->getSize()>10))  { cerr << NAMERR; return 1;}
     int oshelN = pow(2.0,tmp->getData()->getSize()); //size of P(A)
-    Set* powSet = new Set[oshelN];
-    SetLL* powLink= new SetLL;
+//    Set* powSet = new Set[oshelN];
+    SetLL* powLink= new SetLL();
     Set* subset = new Set();
     Set* OGset = tmp->getData();
-    powerSetHelper(OGset, subset, powSet, 0);
-    powSet -= oshelN;
-    for( int i=0; i<oshelN; i++){
-        powSet[i].printSet();
-    }
+    powerSetLLHelper(OGset, subset, powLink, 0 );
+    powLink->Print();
+    //powLink->Destroy();
     return 0;
 }
 
-int SetCalc::powerSetHelper(Set *&given_set, Set *&subset, Set *&powSet, int index){
+//int SetCalc::powerSetHelper(Set *&given_set, Set *&subset, Set *&powSet, int index){
+//    //int* array = new int[given_set->getSize()];
+//    if (index == given_set->getSize()) { Set* tmp = new Set(*subset->getElms(),subset->getSize(),"A"); *powSet++ = *tmp; return 0;}
+//    else {
+//
+//        powerSetHelper(given_set, subset, powSet,index+1);
+//       // subset->add((*given_set->getElms())[index]);
+//        //subset->printSet();
+//        powerSetHelper(given_set, subset, powSet,index+1);
+//        //subset->pop((*given_set->getElms())[index]);
+//    }
+//return 0;
+//}
+
+int SetCalc::powerSetLLHelper(Set *&given_set, Set *&subset, SetLL* powLink, int index){
     //int* array = new int[given_set->getSize()];
-    if (index == given_set->getSize()) { Set* tmp = new Set(*subset->getElms(),subset->getSize(),"A"); *powSet++ = *tmp; return 0;}
+    cout<<"this is indexc"<<index<<endl;   cout<<given_set->getSize();
+    if (index == given_set->getSize()-1) { powLink->append(new Set(*subset->getElms(),subset->getSize(),"A")); return 0;}
     else {
 
-        powerSetHelper(given_set, subset, powSet,index+1);
+        powerSetLLHelper(given_set, subset, powLink,index+1);
+       // cout<<"this is indexa"<<index<<endl;
         subset->add((*given_set->getElms())[index]);
-        subset->setSize(subset->getSize()+1);
-        //subset->printSet();
-        powerSetHelper(given_set, subset, powSet,index+1);
-    }
-return 0;
-}
-
-int SetCalc::powerSetLLHelper(Set *&given_set, Set *&subset, SetLL *&powSet, int index){
-    //int* array = new int[given_set->getSize()];
-    if (index == given_set->getSize()) { Set* tmp = new Set(*subset->getElms(),subset->getSize(),"A"); *powSet++ = *tmp; return 0;}
-    else {
-
-        powerSetHelper(given_set, subset, powSet,index+1);
-        subset->add((*given_set->getElms())[index]);
-        subset->setSize(subset->getSize()+1);
-        //subset->printSet();
-        powerSetHelper(given_set, subset, powSet,index+1);
+        powLink->Print();
+       // cout<<"this is indexb"<<index<<endl;
+        powerSetLLHelper(given_set, subset, powLink,index+1);
+        subset->pop((*given_set->getElms())[index]);
     }
     return 0;
 }

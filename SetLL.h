@@ -31,6 +31,8 @@ public:
 private:
     LLNode* head;
     LLNode* curr;
+
+    LLNode *find(int *elms);
 };
 
 

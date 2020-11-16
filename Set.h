@@ -22,12 +22,13 @@ public:
     int getSize() const { return size; }
     void add(int item);
 
+    void pop(int item);
+
 private:
     int *elms;
     int size;
     string name;
 
-    void pop(int item);
 };
 
 

@@ -10,10 +10,10 @@ void SetLL::append(Set *new_set) { /* 1. allocate node */
     LLNode *newNode = new LLNode(new_set);
     if (isEmpty()) { head = newNode; }
     else {
-        gotoEnd(); cout<<"append at end";
+        gotoEnd(); //cout<<"append at end";
     curr->setNext(newNode);
     curr=newNode;
-    cout<<"this is append"<<endl;
+    //cout<<"this is append"<<endl;
     }
 }
 
@@ -49,6 +49,18 @@ LLNode * SetLL::find(string name) {
     if (isEmpty()) return NULL;
     gotoBeginning();
     do {if ( curr->getData()->getName() == name ) { return curr; } }
+    while( gotoNext());
+    return NULL;
+}
+
+LLNode * SetLL::find(int* elms) {
+    if (isEmpty()) return NULL;
+    bool flag;
+    gotoBeginning();
+    do { flag = true; for (int i = 0; i < curr->getData()->getSize(); i++) {
+            if ((*curr->getData()->getElms())[i] != elms[i]) flag = false;
+            if (flag) { return curr; }  }
+    }
     while( gotoNext());
     return NULL;
 }

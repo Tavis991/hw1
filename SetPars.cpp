@@ -5,21 +5,6 @@
 #include <cstdlib>
 #include "SetPars.h"
 SetPars::SetPars(){}
-//
-//string SetPars::parseName() {
-//    nullti();
-//    cin.ignore();
-//    getline(cin,t);
-//    stringstream tip(t);
-//    tip>>t;
-//    cout<<"this is t"<<t<<endl;
-//    if (t.size()>8 || t.size()==0) return "0";
-//    for (int i=0;i<t.size();i++) { if (! isupper(t[i])) { return "0";}}
-//    string test;
-//    tip>>test; if(test.size()>0) return "0";
-//    cout<<"this is last t"<<t<<endl;
-//    return t;
-//}
 string SetPars::parseNameX(bool flag) {
     nullti();
     if (flag) cin.ignore();
