@@ -9,7 +9,7 @@ int main() {
     while(cal.run()) {
         prompt();
     }
-    cal.Destroy();
+   // cal.Destroy();
     return 0;
 }
 

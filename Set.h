@@ -13,7 +13,7 @@ public:
     Set(int *&elements, int count, string nom);
     void printSet() const;
     void Sort();
-    void destroy() { delete(elms); }
+    void destroy() { delete(elms); cout<<"this is set dest"; }
     string getName() const { return (name); }
     void setElms(int*& elements) { this->elms=elements; }
     int **getElms() { return &elms; }
@@ -26,6 +26,8 @@ private:
     int *elms;
     int size;
     string name;
+
+    void pop(int item);
 };
 
 

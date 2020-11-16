@@ -25,6 +25,7 @@ void SetLL::Replace(Set*& new_set){
 
 void SetLL::Destroy() {
     if (isEmpty()) return;
+    cout<<"this is setllDEL";
     gotoBeginning();
     LLNode* temp=head;
     head->Destroy();

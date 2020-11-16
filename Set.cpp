@@ -63,10 +63,27 @@ void Set::add(int item) {
     for (i=0; i<size; i++){
         new_arr[i]=elms[i];
     }
+    size++;
     new_arr[i]=item;
-    delete(elms);
+    //delete(elms);
     elms = new_arr;
-    Sort();
+    cout<<elms[i];
+    //Sort();
+    cout<<"this is add"; printSet();
+}
+
+void Set::pop(int item) {
+    int* new_arr = new int[size-1];
+    int i,j;
+    for (i=0; i<size; i++,j++){
+        if (elms[i] == item) continue; j--;
+        new_arr[j]=elms[i];
+    }
+    size--;
+    elms = new_arr;
+    cout<<elms[i];
+    //Sort();
+    cout<<"this is pop"; printSet();
 }
 
 

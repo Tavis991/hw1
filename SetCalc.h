@@ -29,6 +29,10 @@ private:
     SetPars parsi;
     int size;
     int powerSetHelper(Set *&given_set, Set *&subset, Set *&pow, int index);
+
+    int powerSetLLHelper(Set *&given_set, Set *&subset, Set *&powSet, int index);
+
+    int powerSetLLHelper(Set *&given_set, Set *&subset, SetLL *&powSet, int index);
 };
 
 
