@@ -68,11 +68,11 @@ void Set::add(int item) {
     delete(elms);
     elms = new_arr;
     //cout<<elms[i];
-    Sort();
+    //Sort();
    // cout<<"this is add"; printSet();
 }
 
-void Set::pop(int item) {
+void Set::pop(int item) { //this removes specifed item
     //cout<<"this is pop"; printSet();
     int* new_arr = new int[size-1];
     int i,j;
@@ -85,12 +85,21 @@ void Set::pop(int item) {
     delete(elms);
     elms = new_arr;
     //cout<<elms[i];
-    Sort();
+    //Sort();
     //cout<<"this is pop"; printSet();
 }
 
 
-
+void Set::pop() { //this removes last item
+    //cout<<"this is pop"; printSet();
+    int *new_arr = new int[size - 1];
+    for (int i = 0; i < size; i++) {
+        new_arr[i] = elms[i];
+    }
+    size--;
+    delete (elms);
+    elms = new_arr;
+}
 
 
 

@@ -198,17 +198,18 @@ int SetCalc::powerSet(){
 
 int SetCalc::powerSetLLHelper(Set *&given_set, Set *&subset, SetLL* powLink, int index){
     //int* array = new int[given_set->getSize()];
-    cout<<"this is indexc"<<index<<endl;   cout<<given_set->getSize();
-    if (index == given_set->getSize()-1) { powLink->append(new Set(*subset->getElms(),subset->getSize(),"A")); return 0;}
+    cout<<"this is indexc"<<index<<endl;   cout<<subset->getSize();
+    if (index >= given_set->getSize()-1) { powLink->append(new Set(*subset->getElms(),subset->getSize(),"A")); return 0;}
     else {
 
         powerSetLLHelper(given_set, subset, powLink,index+1);
        // cout<<"this is indexa"<<index<<endl;
         subset->add((*given_set->getElms())[index]);
-        powLink->Print();
+        cout<<"this is indexc"<<index<<endl;   cout<<subset->getSize();
+       // powLink->Print();
        // cout<<"this is indexb"<<index<<endl;
         powerSetLLHelper(given_set, subset, powLink,index+1);
-        subset->pop((*given_set->getElms())[index]);
+        subset->pop();//(*given_set->getElms())[index]
     }
     return 0;
 }

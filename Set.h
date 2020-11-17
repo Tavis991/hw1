@@ -24,6 +24,8 @@ public:
 
     void pop(int item);
 
+    void pop();
+
 private:
     int *elms;
     int size;
