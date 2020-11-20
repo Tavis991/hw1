@@ -6,28 +6,26 @@
 #define HW1_SET_H
 using namespace std;
 #include <iostream>
-
+#include "Vect.h"
 class Set {
 public:
     Set();
+    Set(const Set &other);
     Set(int *&elements, int count, string nom);
     void printSet() const;
+    int pop();
+    void add(int item);
+    int get(int item) { return vic.get(item);}
     void Sort();
-    void destroy() { delete(elms); cout<<"this is set dest"; }
+    void destroy() {  vic.destroy(); }
     string getName() const { return (name); }
-    void setElms(int*& elements) { this->elms=elements; }
-    int **getElms() { return &elms; }
     void setName(string name){ this->name=name; }
     void setSize(int size) { this->size=size; }
     int getSize() const { return size; }
-    void add(int item);
-
-    void pop(int item);
-
-    void pop();
+    bool operator<(const Set& b);
 
 private:
-    int *elms;
+    Vect vic;
     int size;
     string name;
 

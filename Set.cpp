@@ -3,102 +3,65 @@
 //
 
 #include "Set.h"
+
 Set::Set()
-:name("0"),size(0),elms(NULL)
+:size(0), name("0")
+{}
+Set::Set(const Set& other)
+:vic(other.vic),  size(other.size) ,name(other.name)//copy ctor
 {}
 
-Set::Set(int *&elements, int count, string nom)
+bool Set::operator<(const Set &b) { //operator < for set used for sorting power set
+    if (size < b.getSize()) return false;
+    else if (b.getSize() > size) return true; //by size
+    else {
+        for (int i = 0; i < size; i++) {
+            if (vic.get(i)>b.vic.get(i)) return true; //then by elms
+            else if (vic.get(i)<b.vic.get(i)) return false;
+        }
+    }
+    return false;
+}
+
+Set::Set(int *&elements, int count, string nom) //constructor
 :name(nom){
-//    cout<<"this is set init"<<endl;
-    //cout<<"this is set initcount"<<count<<endl;
-    int temp[count];
+    int *temp = new int[count];
     int j=0;
     bool flg;
     for(int i=0;i<count;i++){
         flg=false;
-        for (int k=0;k<j;k++){  //deleting duplicates
+        for (int k=0;k<j;k++){  //here we are deleting duplicates
             if(elements[i]==temp[k]){flg=true; break;}
         }
         if (!flg){temp[j]=elements[i]; j++;}
-        //cout<<elements[i];
     }
-    elms=new int[j]; //allocating premenet array
-    for(int i=0;i<j;i++){
-
-        elms[i]=temp[i];
-        //cout<<elms[i]<<"this is temp"<<endl;
-    }
-    delete(elements);
+    vic.elms=new int[j+1]; //allocating premenent array
+    vic.capacity=j+1; //setting size
     this->size=j;
-    this->Sort();
+    for(int i=0;i<j;i++){
+        vic.elms[i]=temp[i];
+    }
+    delete(elements); //delete the original arr
+    delete(temp); //delete temp arr
+    this->vic.current=j;
+    this->vic.Sort();
 }
 
-void Set::Sort(){
-    int i, j, key;
-    for (i = 1; i < size; i++){
-        key = elms[i];
-        j = i - 1;
-        while (j >= 0 && elms[j] > key){
-            elms[j + 1] = elms[j];
-            j = j - 1;
-        }
-        elms[j + 1] = key;
-    }
-//    for(int i=0;i<size;i++){
-//       cout<<elms[i]<<"this is sorted set";
-//    }
-}
+
 void  Set::printSet() const{
-    cout<<'{';
-    for(int i=0;i<size;i++){
-        cout<<elms[i];
-        if(i<size-1){cout<<',';}
-    }
-    cout<<'}';
+    cout << '{';
+    vic.print();
+    cout << '}';
 }
 
 void Set::add(int item) {
-    int* new_arr = new int[size+1];
-    int i;
-    for (i=0; i<size; i++){
-        new_arr[i]=elms[i];
-    }
+    vic.push(item);
     size++;
-    new_arr[i]=item;
-    delete(elms);
-    elms = new_arr;
-    //cout<<elms[i];
-    //Sort();
-   // cout<<"this is add"; printSet();
 }
 
-void Set::pop(int item) { //this removes specifed item
-    //cout<<"this is pop"; printSet();
-    int* new_arr = new int[size-1];
-    int i,j;
-    cout<<elms[i];
-    for (i=0; i<size; i++,j++){
-        if (elms[i] == item) continue; j--;
-        new_arr[j]=elms[i];
-    }
+int Set::pop() { //this removes last item
     size--;
-    delete(elms);
-    elms = new_arr;
-    //cout<<elms[i];
-    //Sort();
-    //cout<<"this is pop"; printSet();
-}
-
-
-void Set::pop() { //this removes last item
-    //cout<<"this is pop"; printSet();
-    int *new_arr = new int[size - 1];
-    for (int i = 0; i < size; i++) {
-        new_arr[i] = elms[i];
-    }
-    size--;
-    delete (elms);
-    elms = new_arr;
+    return(vic.pop());
 }
 
 

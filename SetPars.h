@@ -14,8 +14,7 @@ using namespace std;
 
 class SetPars {
 public:
-    SetPars();
-   // string parseName();
+    SetPars(); //parser for calculator
     int parseSet(int *& pointy);
     string parse2Name(string & nom1, string & nom2);
     void nullti() {t="";}
@@ -23,8 +22,6 @@ public:
 
 private:
     string t;
-
 };
-
 
 #endif //HW1_SETPARS_H

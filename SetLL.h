@@ -7,12 +7,11 @@
 #include "Set.h"
 #include "LLNode.h"
 
-class SetLL {
+class SetLL {  //this is a linked list of sets with basic functions
 public:
-    SetLL(){
-        head=NULL;
-        curr=NULL;
-    }
+    SetLL():
+     head(NULL), curr(NULL), size(0)
+    {}
     void append(Set* set);
     int gotoNext() { if ( curr->getNext() ) { curr = curr->getNext(); return 1; } return 0;}
     int hasNext() { if ( curr->getNext() ) { return 1; } return 0;}
@@ -27,12 +26,15 @@ public:
     LLNode* getHead() { return head; }
     int del (LLNode* del);
     LLNode* find (string name);
+    int getSize() const {return size;}
+    void append(Set *new_set, bool flg);
 
 private:
     LLNode* head;
     LLNode* curr;
-
+    int size;
     LLNode *find(int *elms);
+
 };
 
 

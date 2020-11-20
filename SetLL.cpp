@@ -5,47 +5,34 @@
 #include "SetLL.h"
 #include "LLNode.h"
 void SetLL::append(Set *new_set) { /* 1. allocate node */
-//    cout<<"this is append"<<endl;
-//    new_set->printSet();
     LLNode *newNode = new LLNode(new_set);
     if (isEmpty()) { head = newNode; }
     else {
-        gotoEnd(); //cout<<"append at end";
+        gotoEnd();
     curr->setNext(newNode);
     curr=newNode;
-    //cout<<"this is append"<<endl;
     }
+    size++;
 }
 
 void SetLL::Replace(Set*& new_set){
-    cout<<"replace";
-    curr->Destroy();
+    curr->getData()->destroy();
     curr->setData(new_set);
 }
 
 void SetLL::Destroy() {
-    if (isEmpty()) return;
-    cout<<"this is setllDEL";
+    if (isEmpty()) return;   // if is empty nothing to delete
     gotoBeginning();
     LLNode* temp=head;
-    head->Destroy();
-    delete(head);
-    while(temp->getNext()){
+    while(temp->getNext()){    //deleting ..
         curr = temp->getNext();
         temp->Destroy();
         delete(temp);
-        temp=temp;
+        temp=curr;
     }
 }
 
-void SetLL::Print() {
-    if(isEmpty()) return;
-    gotoBeginning();
-    do { curr->printNod(); }
-    while ( gotoNext());
-}
-
-LLNode * SetLL::find(string name) {
+LLNode * SetLL::find(string name) {  // i return pointer because reference cannot be null
     if (isEmpty()) return NULL;
     gotoBeginning();
     do {if ( curr->getData()->getName() == name ) { return curr; } }
@@ -53,32 +40,22 @@ LLNode * SetLL::find(string name) {
     return NULL;
 }
 
-LLNode * SetLL::find(int* elms) {
-    if (isEmpty()) return NULL;
-    bool flag;
-    gotoBeginning();
-    do { flag = true; for (int i = 0; i < curr->getData()->getSize(); i++) {
-            if ((*curr->getData()->getElms())[i] != elms[i]) flag = false;
-            if (flag) { return curr; }  }
-    }
-    while( gotoNext());
-    return NULL;
-}
-
 int SetLL::del(LLNode* del) {
     if (isEmpty()) return 0;
-    if ( del == head ) { LLNode* tmp = del->getNext();
+    if ( del == head ) {
+        LLNode* tmp = del->getNext(); // if i want to delete head
     head->Destroy(); head=tmp;  return 0;}
-    else if ( del->getNext()){
+    else if ( del->getNext()){   // if i want to delete in mid
         LLNode* tmp = del->getNext();
         gotoPrior();
         curr->getNext()->Destroy();
-        curr->setNext(tmp);
+        curr->setNext(tmp); //skip pointers over deleted element
         return 0;
     }
     gotoPrior();
     curr->getNext()->Destroy();
     curr->nullify();
+    size--;
     return 0;
 }
 
@@ -87,9 +64,5 @@ void SetLL::gotoPrior() {
     gotoBeginning();
     while (curr->getNext() != temp) { gotoNext();}
 }
-
-//void SetLL::gotoPrior() {gotoBeginning(); while(curr->getNext()!=)
-//
-//}
 
 

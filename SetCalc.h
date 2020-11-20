@@ -20,6 +20,7 @@ public:
     void Destroy() { SetLINKED.Destroy();}
     int powerSet();
 private:
+    const string NAMERR2;
     const string NAMERR;
     const string SIZERR;
     const string INPERR;
@@ -27,10 +28,9 @@ private:
 
     SetLL SetLINKED;
     SetPars parsi;
-    int size;
-    int powerSetHelper(Set *&given_set, Set *&subset, Set *&pow, int index);
+    int powerSetLLHelper(Set *&given_set, Set *&subset, SetLL *&powSet, int index);
 
-    int powerSetLLHelper(Set *&given_set, Set *&subset, SetLL *powSet, int index);
+    void powerSort(Set *&arr, int Oshel);
 };
 
 
